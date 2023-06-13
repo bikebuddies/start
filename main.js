@@ -12,6 +12,8 @@ let map = L.map("map").setView([
     eisenstadt.lat, eisenstadt.lng
 ], 7);
 
+//Fullscreen control
+map.addControl(new L.Control.Fullscreen());
 
 // Hintergrundlayer 
 //!Können wir noch schauen, welche besser passen!
