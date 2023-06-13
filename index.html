@@ -21,6 +21,11 @@
     <!-- Leaflet Providers -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-providers/1.13.0/leaflet-providers.min.js" integrity="sha512-5EYsvqNbFZ8HX60keFbe56Wr0Mq5J1RrA0KdVcfGDhnjnzIRsDrT/S3cxdzpVN2NGxAB9omgqnlh4/06TvWCMw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <!--Leaflet Fullscreen-->
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'
+        rel='stylesheet' />
+
     <!-- eigene Stile und Hauptskript -->
     <link rel="stylesheet" href="main.css">
     <script defer src="main.js"></script>
@@ -29,20 +34,32 @@
 <body>
     <main>
         <header>
-            <h1><i class="fa-solid fa-person-biking"></i> BikeBuddies</h1>
+            <h1><i class="fa-solid fa-person-biking"></i> BikeBuddies</h1> <br>
             <h2>Radfahren in Ostösterreich</h2>
             <nav>
                 <i class="fab fa-github"></i> <a href="https://github.com/bikebuddies/start">Github</a>
             </nav>
         </header>
         <article>
+            <p>
+                BikeBuddies stellen Fahrradkarten mit ausgewählten Radrouten und praktischen Informationen rund ums 
+                Radfahren zu Verfügung. Der regionale Fokus liegt auf Ostösterreich. Im Pulldown Menü können die 
+                jeweiligen Bundesländer ausgewählt werden, in denen geradelt werden soll. Dort befinden sich
+                detailliertere Karten und GPX Tracks von ausgewählten Radrouten. 
+            </p>
+            <h3>Übersichtskarte Region Ostösterreich</h3>
             <div id="map"></div>
         </article>
         <footer>
             <strong>Quelle:</strong>
             <nav>
+                <!-- Quellen für abgebildeten Radrouten etc. angeben-->
                 <a href="https://leafletjs.com/examples/mobile/">Leaflet on Mobile Tutorial</a>
             </nav>
+            <p>
+                BikeBuddies ist ein Gruppenprojekt im Rahmen der VU Geoinformatik: Web mapping am Institut 
+                für Geographie an der Universität Innsbruck. 
+            </p>
         </footer>
     </main>
 </body>
