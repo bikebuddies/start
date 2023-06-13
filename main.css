@@ -35,6 +35,10 @@ article {
     margin-top: 0.5em;
 }
 
+#pulldown {
+    margin-bottom: 0.3em;
+}
+
 #map {
     height: 85vh;
     width: 100%;
