@@ -25,8 +25,10 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #f9f7f3;
+    background-color: #dacfba;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-image: url('pictures/header.png'); 
+    opacity: 1; /* Macht den Header 50% transparent */
 }
 
 header h2 {
