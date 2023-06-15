@@ -30,6 +30,7 @@ header {
     background-image: url('pictures/header.png'); 
     opacity: 1; /* Macht den Header 50% transparent */
 }
+/* Quelle Header-Bild: https://pixabay.com/de/photos/zaun-fahrrad-alt-blumen-dekoration-4520086/ */
 
 header h2 {
     margin: 0;
