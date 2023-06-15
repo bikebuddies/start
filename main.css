@@ -10,7 +10,7 @@ body {
 }
 
 a {
-    color: rgb(255, 255, 255);
+    color: black;
     text-decoration: none;
 }
 
@@ -31,6 +31,14 @@ header {
     opacity: 1; /* Macht den Header 50% transparent */
 }
 /* Quelle Header-Bild: https://pixabay.com/de/photos/zaun-fahrrad-alt-blumen-dekoration-4520086/ */
+
+h1 {
+    color: rgb(247, 234, 210);
+}
+
+h2 {
+    color: white;
+}
 
 header h2 {
     margin: 0;
@@ -85,4 +93,5 @@ footer {
 
 footer nav {
     display: inline-block;
+    margin: 0 10px;
 }
