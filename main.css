@@ -74,8 +74,34 @@ article {
 }
 
 #pulldown {
-    margin-bottom: 10px;
+    position: relative;
 }
+
+#pulldown ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#pulldown ul li {
+    display: inline-block;
+}
+
+#pulldown ul li a {
+    display: block;
+    padding: 10px 20px;
+    color: #333333;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#pulldown ul li a:hover {
+    background-color: #e5e5e5;
+}
+
 
 #map {
     height: 85vh;
