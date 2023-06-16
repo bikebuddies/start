@@ -17,8 +17,9 @@ let map = L.map("map", {
 // Hintergrundlayer 
 //!Können wir noch schauen, welche besser passen!
 let layerControl = L.control.layers({
-    "OpenStreetMap": L.tileLayer.provider("OpenStreetMap.DE").addTo(map),
-    "OpenTopoMap": L.tileLayer.provider("OpenTopoMap"),
+    "StadiaGray": L.tileLayer.provider("Stadia.AlidadeSmooth"),
+    "Terrain": L.tileLayer.provider("Stamen.Terrain").addTo(map),
+    "BasemapÖsterreich": L.tileLayer.provider("BasemapAT.grau"),
     "CycleTrails": L.tileLayer.provider("CyclOSM"),
 }).addTo(map);
 
