@@ -17,8 +17,8 @@ let map = L.map("map", {
 // Hintergrundlayer 
 //!Können wir noch schauen, welche besser passen!
 let layerControl = L.control.layers({
-    "StadiaGray": L.tileLayer.provider("Stadia.AlidadeSmooth"),
     "Terrain": L.tileLayer.provider("Stamen.Terrain").addTo(map),
+    "StadiaGray": L.tileLayer.provider("Stadia.AlidadeSmooth"),
     "BasemapÖsterreich": L.tileLayer.provider("BasemapAT.grau"),
     "CycleTrails": L.tileLayer.provider("CyclOSM"),
 }).addTo(map);
