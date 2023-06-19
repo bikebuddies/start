@@ -16,9 +16,9 @@ let map = L.map("map", {
 
 //thematische Layer
 let themaLayer = {
-    burgenland : L.featureGroup(),
-    niederoesterreich : L.featureGroup(),
-    wien : L.featureGroup()
+    burgenland: L.featureGroup(),
+    niederoesterreich: L.featureGroup(),
+    wien: L.featureGroup()
 }
 
 // Hintergrundlayer 
@@ -29,34 +29,67 @@ let layerControl = L.control.layers({
     "BasemapÖsterreich": L.tileLayer.provider("BasemapAT.grau"),
     "CycleTrails": L.tileLayer.provider("CyclOSM"),
 },
-{
-    "Radrouten Burgenland" : themaLayer.burgenland,
-    "Radrouten Niederösterreich" : themaLayer.niederoesterreich,
-    "Radrouten Wien" : themaLayer.wien
-}).addTo(map);
+    {
+        "Radrouten Burgenland": themaLayer.burgenland,
+        "Radrouten Niederösterreich": themaLayer.niederoesterreich,
+        "Radrouten Wien": themaLayer.wien
+    }).addTo(map);
 // Layer beim Besuch auf der Seite ausklappen
 layerControl.expand();
 
-// Burgenland Radwege Layer
-function writeBurgenlandLayer(jsondata) {
+L.geoJSON("data/burgenland_radwege.geojson").addTo(map)
+
+/*
+// Burgenland Radwege Layer (von Vienna Sightseeing Linien)
+async function showBurgenland(jsondata) {
     L.geoJSON(jsondata, {
-        filter: function(feature) {
-            if (feature.properties.LT > -50 && feature.properties.LT < 50) {
-                return true;
+        style: function (feature) {
+            return {
+                color: "#ff0000",
+                weight: 3,
+                opacity: 0.5
+            };
             }
-        },
-        pointToLayer: function (feature, latlng) {
-            let color = getColor(feature.properties.LT, COLORS.temperature);
-            return L.marker(latlng, {
-                icon: L.divIcon({
-                    className: "aws-div-icon",
-                    html: `<span style="background-color: ${color}">${feature.properties.LT.toFixed(1)}</span>`
-                })
-            });
-        },        
-    }).addTo(themaLayer.temperature);
+        }
+        ).addTo(themaLayer.burgenland)
+    }
+        /*onEachFeature: function(feature, layer) {
+            let prop = feature.properties;
+            layer.bindPopup(`
+            <h4>${prop.Name}</h4>
+            <p>${prop.Descript}</p>
+            `);
+        }
+    }).addTo(themaLayer.burgenland);
 }
 
+showBurgenland("\data\burgenland_radwege.geojson");*/
+  
+/*
+    //console.log(response, jsondata);
+    L.geoJSON(jsondata, {
+        style: function (feature) {
+            return {
+                color: lineColors[feature.properties.LINE_ID],
+                weight: 3,
+                dashArray: [10, 4]
+            };
+        },
+        onEachFeature: function (feature, layer) {
+            let prop = feature.properties;
+            layer.bindPopup(`
+            <h4><i class="fa-sharp fa-solid fa-bus"></i> ${prop.LINE_NAME}</h4>
+            <p><i class="fa-sharp fa-regular fa-circle-stop"></i> ${prop.FROM_NAME}<br>
+            <i class="fa-sharp fa-solid fa-down-long"></i><br>
+            <i class="fa-sharp fa-regular fa-circle-stop"></i> ${prop.TO_NAME}</p>
+            `);
+            lineNames[prop.LINE_ID] = prop.LINE_NAME;
+            //console.log(lineNames)
+        }
+    }).addTo(themaLayer.lines);
+}
+}
+*/
 // Marker Hauptstädte
 const STAEDTE = [
     {
@@ -85,7 +118,7 @@ for (let stadt of STAEDTE) {
         .bindPopup(`${stadt.title} <br>
     <a href="${stop.wikipedia}">Wikipedia</a>
     `)
-    };
+};
 
 // Maßstab
 L.control.scale({
