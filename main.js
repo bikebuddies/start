@@ -12,7 +12,7 @@ let map = L.map("map", {
     fullscreenControl: true
 }).setView([
     stpolten.lat, stpolten.lng
-], 7.5);
+], 7);
 
 //thematische Layer
 let themaLayer = {
@@ -30,66 +30,47 @@ let layerControl = L.control.layers({
     "CycleTrails": L.tileLayer.provider("CyclOSM"),
 },
     {
-        "Radrouten Burgenland": themaLayer.burgenland,
+        "Radrouten Burgenland": themaLayer.burgenland.addTo(map),
         "Radrouten Niederösterreich": themaLayer.niederoesterreich,
         "Radrouten Wien": themaLayer.wien
     }).addTo(map);
+
 // Layer beim Besuch auf der Seite ausklappen
 layerControl.expand();
 
-L.geoJSON("data/burgenland_radwege.geojson").addTo(map)
-
-/*
 // Burgenland Radwege Layer (von Vienna Sightseeing Linien)
-async function showBurgenland(jsondata) {
-    L.geoJSON(jsondata, {
-        style: function (feature) {
-            return {
-                color: "#ff0000",
-                weight: 3,
-                opacity: 0.5
-            };
-            }
-        }
-        ).addTo(themaLayer.burgenland)
-    }
-        /*onEachFeature: function(feature, layer) {
-            let prop = feature.properties;
-            layer.bindPopup(`
-            <h4>${prop.Name}</h4>
-            <p>${prop.Descript}</p>
-            `);
-        }
-    }).addTo(themaLayer.burgenland);
-}
-
-showBurgenland("\data\burgenland_radwege.geojson");*/
-  
-/*
+async function burgenlandRadwege(url) {
+    let response = await fetch(url);
+    let jsondata = await response.json();
+    let einzelneRouten = {};
+    let routenFarben = { //Rottöne von https://www.color-meanings.com/shades-of-red-color-names-html-hex-rgb-codes/
+        "Festival-Radweg": "#8D021F", //Burgundy 
+        "Iron Curtain Trail - Gesamtroute": "#CD5C5C", //Indian Red
+        "Paradiesroute": "#7C0A02", //Barn Red
+        "R1 Jubiläumsradweg": "#E0115F", //Ruby
+        "B32 Rosalia-Radwanderweg": "#FF0800", //Candy Apple
+    } 
     //console.log(response, jsondata);
     L.geoJSON(jsondata, {
         style: function (feature) {
             return {
-                color: lineColors[feature.properties.LINE_ID],
+                color: routenFarben[feature.properties.Name],
                 weight: 3,
-                dashArray: [10, 4]
             };
         },
         onEachFeature: function (feature, layer) {
             let prop = feature.properties;
+            //Font-awesome Icons vor der Überschrift und Beschreibung funktionieren leider nicht. Wieso?
             layer.bindPopup(`
-            <h4><i class="fa-sharp fa-solid fa-bus"></i> ${prop.LINE_NAME}</h4>
-            <p><i class="fa-sharp fa-regular fa-circle-stop"></i> ${prop.FROM_NAME}<br>
-            <i class="fa-sharp fa-solid fa-down-long"></i><br>
-            <i class="fa-sharp fa-regular fa-circle-stop"></i> ${prop.TO_NAME}</p>
+            <h4> ${prop.Name}</h4>
+            <p> ${prop.Descript}<br>
             `);
-            lineNames[prop.LINE_ID] = prop.LINE_NAME;
-            //console.log(lineNames)
+            einzelneRouten[prop.Name] = prop.Name;
         }
-    }).addTo(themaLayer.lines);
+    }).addTo(themaLayer.burgenland);
 }
-}
-*/
+burgenlandRadwege("data/burgenland_radwege.geojson");
+
 // Marker Hauptstädte
 const STAEDTE = [
     {
@@ -147,4 +128,3 @@ pulldown.onchange = function(evt) {
     window.location.href = url;
 }
 */
-
