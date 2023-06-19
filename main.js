@@ -14,6 +14,13 @@ let map = L.map("map", {
     stpolten.lat, stpolten.lng
 ], 7.5);
 
+//thematische Layer
+let themaLayer = {
+    burgenland : L.featureGroup(),
+    niederoesterreich : L.featureGroup(),
+    wien : L.featureGroup()
+}
+
 // Hintergrundlayer 
 //!Können wir noch schauen, welche besser passen!
 let layerControl = L.control.layers({
@@ -21,7 +28,34 @@ let layerControl = L.control.layers({
     "StamenB/W": L.tileLayer.provider("Stamen.TonerLite"),
     "BasemapÖsterreich": L.tileLayer.provider("BasemapAT.grau"),
     "CycleTrails": L.tileLayer.provider("CyclOSM"),
+},
+{
+    "Radrouten Burgenland" : themaLayer.burgenland,
+    "Radrouten Niederösterreich" : themaLayer.niederoesterreich,
+    "Radrouten Wien" : themaLayer.wien
 }).addTo(map);
+
+
+
+// Burgenland Radwege Layer
+function writeBurgenlandLayer(jsondata) {
+    L.geoJSON(jsondata, {
+        filter: function(feature) {
+            if (feature.properties.LT > -50 && feature.properties.LT < 50) {
+                return true;
+            }
+        },
+        pointToLayer: function (feature, latlng) {
+            let color = getColor(feature.properties.LT, COLORS.temperature);
+            return L.marker(latlng, {
+                icon: L.divIcon({
+                    className: "aws-div-icon",
+                    html: `<span style="background-color: ${color}">${feature.properties.LT.toFixed(1)}</span>`
+                })
+            });
+        },        
+    }).addTo(themaLayer.temperature);
+}
 
 // Marker Hauptstädte
 const STAEDTE = [
@@ -46,7 +80,6 @@ const STAEDTE = [
 ]
 
 for (let stadt of STAEDTE) {
-    //Marker für den Stopp
     let marker = L.marker([stadt.lat, stadt.lng])
         .addTo(map)
         .bindPopup(`${stadt.title} <br>
@@ -58,6 +91,8 @@ for (let stadt of STAEDTE) {
 L.control.scale({
     imperial: false,
 }).addTo(map);
+
+
 
 /* Pulldownmenü Code
 //Pulldown für Navigation
@@ -80,26 +115,3 @@ pulldown.onchange = function(evt) {
 }
 */
 
-/* Geolocation würd ich auf der Übersichtskarte weglassen, damit es wirklich nur eine Übersicht wird.
-map.locate({
-    setView: true,
-    watch: true, 
-    maxZoom: 16
-});
-
-let circle = L.circle([0, 0], 0).addTo(map);
-let marker = L.marker([0, 0], 0).addTo(map);
-
-map.on('locationfound', function onLocationFound(evt) {
-    console.log(evt);
-    let radius = Math.round(evt.accuracy);
-    marker.setLatLng(evt.latlng);
-    marker.bindTooltip(`You are within ${radius} meters from this point`).openTooltip();
-    circle.setLatLng(evt.latlng);
-    circle.setRadius(radius);
-});
-
-map.on('locationerror', function onLocationError(evt) {
-    alert(evt.message);
-});
-*/
