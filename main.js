@@ -34,8 +34,8 @@ let layerControl = L.control.layers({
     "Radrouten Niederösterreich" : themaLayer.niederoesterreich,
     "Radrouten Wien" : themaLayer.wien
 }).addTo(map);
-
-
+// Layer beim Besuch auf der Seite ausklappen
+layerControl.expand();
 
 // Burgenland Radwege Layer
 function writeBurgenlandLayer(jsondata) {
