@@ -31,16 +31,16 @@ let layerControl = L.control.layers({
 },
     {
         "Radrouten Burgenland": themaLayer.burgenland.addTo(map),
-        "Radrouten Niederösterreich": themaLayer.niederoesterreich,
-        "Radrouten Wien": themaLayer.wien
+        "Radrouten Niederösterreich": themaLayer.niederoesterreich.addTo(map),
+        "Radrouten Wien": themaLayer.wien.addTo(map)
     }).addTo(map);
 
 // Layer beim Besuch auf der Seite ausklappen
 layerControl.expand();
 
 // Burgenland Radwege Layer (von Vienna Sightseeing Linien)
-async function burgenlandRadwege(url) {
-    let response = await fetch(url);
+async function burgenlandRadwege(jsonFile) {
+    let response = await fetch(jsonFile);
     let jsondata = await response.json();
     let einzelneRouten = {};
     let routenFarben = { //Rottöne von https://www.color-meanings.com/shades-of-red-color-names-html-hex-rgb-codes/
@@ -70,6 +70,74 @@ async function burgenlandRadwege(url) {
     }).addTo(themaLayer.burgenland);
 }
 burgenlandRadwege("data/burgenland_radwege.geojson");
+
+//Niederösterreich Radwege
+async function niederoesterreichRadwege(jsonFile) {
+    let response = await fetch(jsonFile);
+    let jsondata = await response.json();
+    let einzelneRouten = {};
+    let routenFarben = { //Gelbtöne von https://www.farb-tabelle.de/de/farbtabelle.htm#yellow
+        "Ybbstalradweg": "#EEDD82", //BlanchedAlmond 
+        "Triestingau-Radweg": "#B8860B", //DarkGoldenrod
+        "Triesting-Gölsental-Radweg": "#FFB90F", //DarkGoldenrod1
+        "Traisentalweg": "#FFFACD", //LemonChiffon
+        "Thayarunde Waldviertel": "#FFEBCD", //LightGo.denrod
+        "Piestingtal-Radweg": "#EEEE00", //yellow2
+        "Kamp-Thaya-March-Radroute": "#FFD700", //gold
+    } 
+    //console.log(response, jsondata);
+    L.geoJSON(jsondata, {
+        style: function (feature) {
+            return {
+                color: routenFarben[feature.properties.Name],
+                weight: 3,
+            };
+        },
+        onEachFeature: function (feature, layer) {
+            let prop = feature.properties;
+            //Font-awesome Icons vor der Überschrift und Beschreibung funktionieren leider nicht. Wieso?
+            layer.bindPopup(`
+            <h4> ${prop.Name}</h4>
+            <p> ${prop.Descript}<br>
+            `);
+            einzelneRouten[prop.Name] = prop.Name;
+        }
+    }).addTo(themaLayer.niederoesterreich);
+}
+niederoesterreichRadwege("data/niederoesterreich_radwege.geojson");
+
+//Wien Radwege
+async function wienRadwege(jsonFile) {
+    let response = await fetch(jsonFile);
+    let jsondata = await response.json();
+    let einzelneRouten = {};
+    let routenFarben = { //Gelbtöne von https://www.farb-tabelle.de/de/farbtabelle.htm#yellow
+        "Wienerwald (Eurovelo9)": "#8B008B", //DarkMagenta 
+        "Wasser zu Wein": "#BF3EFF", //DarkOrchid1
+        "Urban und Rural": "#E066FF", //MediumOrchid1
+        "Wiener Wasser": "#AB82FF", //MediumPurple1
+        "Unten und Oben": "#FF00FF" //magenta
+    } 
+    //console.log(response, jsondata);
+    L.geoJSON(jsondata, {
+        style: function (feature) {
+            return {
+                color: routenFarben[feature.properties.Name],
+                weight: 3,
+            };
+        },
+        onEachFeature: function (feature, layer) {
+            let prop = feature.properties;
+            //Font-awesome Icons vor der Überschrift und Beschreibung funktionieren leider nicht. Wieso?
+            layer.bindPopup(`
+            <h4> ${prop.Name}</h4>
+            <p> ${prop.Descript}<br>
+            `);
+            einzelneRouten[prop.Name] = prop.Name;
+        }
+    }).addTo(themaLayer.niederoesterreich);
+}
+wienRadwege("data/wien_radwege.geojson");
 
 // Marker Hauptstädte
 const STAEDTE = [
