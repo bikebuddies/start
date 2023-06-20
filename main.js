@@ -38,7 +38,7 @@ let layerControl = L.control.layers({
 // Layer beim Besuch auf der Seite ausklappen
 layerControl.expand();
 
-// Burgenland Radwege Layer (von Vienna Sightseeing Linien)
+// Burgenland Radwege Layer
 async function burgenlandRadwege(jsonFile) {
     let response = await fetch(jsonFile);
     let jsondata = await response.json();
@@ -49,8 +49,7 @@ async function burgenlandRadwege(jsonFile) {
         "Paradiesroute": "#7C0A02", //Barn Red
         "R1 Jubiläumsradweg": "#E0115F", //Ruby
         "B32 Rosalia-Radwanderweg": "#FF0800", //Candy Apple
-    } 
-    //console.log(response, jsondata);
+    };
     L.geoJSON(jsondata, {
         style: function (feature) {
             return {
@@ -84,8 +83,7 @@ async function niederoesterreichRadwege(jsonFile) {
         "Thayarunde Waldviertel": "#FFEBCD", //LightGo.denrod
         "Piestingtal-Radweg": "#EEEE00", //yellow2
         "Kamp-Thaya-March-Radroute": "#FFD700", //gold
-    } 
-    //console.log(response, jsondata);
+    };
     L.geoJSON(jsondata, {
         style: function (feature) {
             return {
@@ -117,8 +115,7 @@ async function wienRadwege(jsonFile) {
         "Urban und Rural": "#E066FF", //MediumOrchid1
         "Wiener Wasser": "#AB82FF", //MediumPurple1
         "Unten und Oben": "#FF00FF" //magenta
-    } 
-    //console.log(response, jsondata);
+    };
     L.geoJSON(jsondata, {
         style: function (feature) {
             return {
@@ -140,6 +137,13 @@ async function wienRadwege(jsonFile) {
 wienRadwege("data/wien_radwege.geojson");
 
 // Marker Hauptstädte
+let stadtMarker = L.icon({
+    iconUrl: 'bigcity.png',
+    iconSize: [38, 95],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76],
+});
+
 const STAEDTE = [
     {
         title: "St. Pölten, Niederösterreich",
@@ -162,7 +166,7 @@ const STAEDTE = [
 ]
 
 for (let stadt of STAEDTE) {
-    let marker = L.marker([stadt.lat, stadt.lng])
+    let marker = L.marker([stadt.lat, stadt.lng], { icon: stadtMarker })
         .addTo(map)
         .bindPopup(`${stadt.title} <br>
     <a href="${stop.wikipedia}">Wikipedia</a>
