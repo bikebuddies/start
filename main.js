@@ -139,13 +139,14 @@ async function wienRadwege(jsonFile) {
 }
 wienRadwege("data/wien_radwege.geojson");
 
-// Marker Hauptstädte
-let stadtMarker = L.icon({
-    iconUrl: 'bigcity.png',
-    iconSize: [38, 95],
+// Marker Hauptstädte 
+// Icon funktioniert nicht: "Not found" error
+/*let stadtMarker = L.icon({
+    iconUrl: 'stadt.png',
+    iconSize: [33, 37],
     iconAnchor: [22, 94],
     popupAnchor: [-3, -76],
-});
+});*/
 
 const STAEDTE = [
     {
@@ -169,10 +170,10 @@ const STAEDTE = [
 ]
 
 for (let stadt of STAEDTE) {
-    let marker = L.marker([stadt.lat, stadt.lng], {icon: stadtMarker})
+    let marker = L.marker([stadt.lat, stadt.lng])
         .addTo(map)
-        .bindPopup(`${stadt.title} <br>
-    <a href="${stop.wikipedia}">Wikipedia</a>
+        .bindPopup(`<b>${stadt.title}</b> <br>
+    <a href="${stadt.wikipedia}">Wikipedia</a>
     `)
 };
 
