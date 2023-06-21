@@ -63,6 +63,9 @@ async function burgenlandRadwege(jsonFile) {
             layer.bindPopup(`
             <h4> ${prop.Name}</h4>
             <p> ${prop.Descript}<br>
+            <br>
+            <b>Distanz: <em>${prop.Distanz} km </em></b><br>
+            <b> Höhenmeter: <em>${prop.Höhenmeter} m </em><b>
             `);
             einzelneRouten[prop.Name] = prop.Name;
         }
@@ -166,7 +169,7 @@ const STAEDTE = [
 ]
 
 for (let stadt of STAEDTE) {
-    let marker = L.marker([stadt.lat, stadt.lng], { icon: stadtMarker })
+    let marker = L.marker([stadt.lat, stadt.lng], {icon: stadtMarker})
         .addTo(map)
         .bindPopup(`${stadt.title} <br>
     <a href="${stop.wikipedia}">Wikipedia</a>
