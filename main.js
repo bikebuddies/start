@@ -112,12 +112,12 @@ async function wienRadwege(jsonFile) {
     let response = await fetch(jsonFile);
     let jsondata = await response.json();
     let einzelneRouten = {};
-    let routenFarben = { //Gelbtöne von https://www.farb-tabelle.de/de/farbtabelle.htm#yellow
-        "Wienerwald (Eurovelo9)": "#8B008B", //DarkMagenta 
-        "Wasser zu Wein": "#BF3EFF", //DarkOrchid1
-        "Urban und Rural": "#E066FF", //MediumOrchid1
-        "Wiener Wasser": "#AB82FF", //MediumPurple1
-        "Unten und Oben": "#FF00FF" //magenta
+    let routenFarben = { //Gelbtöne von https://www.farb-tabelle.de/de/farbtabelle.htm#orange
+        "Wienerwald (Eurovelo 9)": "#EED5B7", //bisque2
+        "Wasser zu Wein": "#FFDAB9", //PeachPuff
+        "Urban und Rural": "#FFA500", //orane
+        "Wiener Wasser": "#FF8247", //sienna1
+        "Unten und Oben": "#E9967A" //DarkSalmon
     };
     L.geoJSON(jsondata, {
         style: function (feature) {
@@ -135,7 +135,7 @@ async function wienRadwege(jsonFile) {
             `);
             einzelneRouten[prop.Name] = prop.Name;
         }
-    }).addTo(themaLayer.niederoesterreich);
+    }).addTo(themaLayer.wien);
 }
 wienRadwege("data/wien_radwege.geojson");
 
