@@ -182,3 +182,10 @@ for (let stadt of STAEDTE) {
 L.control.scale({
     imperial: false,
 }).addTo(map);
+
+//Geolocation
+map.locate({
+    setView: false,
+    maxZoom: 16,
+    watch: true,
+});
