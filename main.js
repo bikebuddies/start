@@ -20,7 +20,6 @@ let themaLayer = {
 };
 
 // Hintergrundlayer 
-//!Können wir noch schauen, welche besser passen!
 let layerControl = L.control.layers({
     "Terrain": L.tileLayer.provider("Stamen.Terrain").addTo(map),
     "StamenB/W": L.tileLayer.provider("Stamen.TonerLite"),
@@ -173,5 +172,3 @@ for (let stadt of STAEDTE) {
 L.control.scale({
     imperial: false,
 }).addTo(map);
-
-//Auf Startsteite keine Geolocation
