@@ -182,3 +182,5 @@ for (let stadt of STAEDTE) {
 L.control.scale({
     imperial: false,
 }).addTo(map);
+
+//Auf Startsteite keine Geolocation
