@@ -3,7 +3,7 @@ let stpolten = {
     lat: 48.18735,
     lng: 15.64139,
     title: "St. Pölten, Niederösterreich"
-}
+};
 
 // Karte initialisieren und Fullscreen Control 
 let map = L.map("map", {
@@ -17,7 +17,7 @@ let themaLayer = {
     burgenland: L.featureGroup(),
     niederoesterreich: L.featureGroup(),
     wien: L.featureGroup()
-}
+};
 
 // Hintergrundlayer 
 //!Können wir noch schauen, welche besser passen!
@@ -104,8 +104,8 @@ async function niederoesterreichRadwege(jsonFile) {
             `);
             einzelneRouten[prop.Name] = prop.Name;
         }
-    }).addTo(themaLayer.niederoesterreich);
-}
+    }).addTo(themaLayer.niederoesterreich)
+};
 niederoesterreichRadwege("data/niederoesterreich_radwege.geojson");
 
 //Wien Radwege
@@ -137,7 +137,7 @@ async function wienRadwege(jsonFile) {
             einzelneRouten[prop.Name] = prop.Name;
         }
     }).addTo(themaLayer.wien);
-}
+};
 wienRadwege("data/wien_radwege.geojson");
 
 // Marker Hauptstädte 
@@ -168,13 +168,13 @@ const STAEDTE = [
         lng: 16.518889,
         wikipedia: "https://de.wikipedia.org/wiki/Eisenstadt"
     },
-]
+];
 
 for (let stadt of STAEDTE) {
-    let marker = L.marker([stadt.lat, stadt.lng])
+    L.marker([stadt.lat, stadt.lng])
         .addTo(map)
         .bindPopup(`<b>${stadt.title}</b> <br>
-    <a href="${stadt.wikipedia}">Wikipedia</a>
+            <a href="${stadt.wikipedia}">Wikipedia</a>
     `)
 };
 
