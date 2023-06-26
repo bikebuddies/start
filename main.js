@@ -140,15 +140,6 @@ async function wienRadwege(jsonFile) {
 };
 wienRadwege("data/wien_radwege.geojson");
 
-// Marker Hauptstädte 
-// Icon funktioniert nicht: "Not found" error
-/*let stadtMarker = L.icon({
-    iconUrl: 'stadt.png',
-    iconSize: [33, 37],
-    iconAnchor: [22, 94],
-    popupAnchor: [-3, -76],
-});*/
-
 const STAEDTE = [
     {
         title: "St. Pölten, Niederösterreich",
