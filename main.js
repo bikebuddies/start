@@ -80,7 +80,7 @@ async function niederoesterreichRadwege(jsonFile) {
         "Triestingau-Radweg": "#B8860B", //DarkGoldenrod
         "Triesting-Gölsental-Radweg": "#FFB90F", //DarkGoldenrod1
         "Traisentalweg": "#FFFACD", //LemonChiffon
-        "Thayarunde Waldviertel": "#C154C1", //Fuchsia
+        "Thayarunde Waldviertel": "#FFEC8B", //LightGoldenrod1
         "Piestingtal-Radweg": "#EEEE00", //yellow2
         "Kamp-Thaya-March-Radroute": "#FFD700", //gold
     };
