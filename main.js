@@ -3,7 +3,7 @@ let stpolten = {
     lat: 48.18735,
     lng: 15.64139,
     title: "St. Pölten, Niederösterreich"
-}
+};
 
 // Karte initialisieren und Fullscreen Control 
 let map = L.map("map", {
@@ -17,10 +17,9 @@ let themaLayer = {
     burgenland: L.featureGroup(),
     niederoesterreich: L.featureGroup(),
     wien: L.featureGroup()
-}
+};
 
 // Hintergrundlayer 
-//!Können wir noch schauen, welche besser passen!
 let layerControl = L.control.layers({
     "Terrain": L.tileLayer.provider("Stamen.Terrain").addTo(map),
     "StamenB/W": L.tileLayer.provider("Stamen.TonerLite"),
@@ -104,8 +103,8 @@ async function niederoesterreichRadwege(jsonFile) {
             `);
             einzelneRouten[prop.Name] = prop.Name;
         }
-    }).addTo(themaLayer.niederoesterreich);
-}
+    }).addTo(themaLayer.niederoesterreich)
+};
 niederoesterreichRadwege("data/niederoesterreich_radwege.geojson");
 
 //Wien Radwege
@@ -133,21 +132,15 @@ async function wienRadwege(jsonFile) {
             layer.bindPopup(`
             <h4> ${prop.Name}</h4>
             <p> ${prop.Descript}<br>
+            <br>
+            <b>Distanz: <em>${prop.Distanz} km </em></b><br>
+            <b> Höhenmeter: <em>${prop.Höhenmeter} m </em><b></p>
             `);
             einzelneRouten[prop.Name] = prop.Name;
         }
     }).addTo(themaLayer.wien);
-}
+};
 wienRadwege("data/wien_radwege.geojson");
-
-// Marker Hauptstädte 
-// Icon funktioniert nicht: "Not found" error
-/*let stadtMarker = L.icon({
-    iconUrl: 'stadt.png',
-    iconSize: [33, 37],
-    iconAnchor: [22, 94],
-    popupAnchor: [-3, -76],
-});*/
 
 const STAEDTE = [
     {
@@ -168,13 +161,13 @@ const STAEDTE = [
         lng: 16.518889,
         wikipedia: "https://de.wikipedia.org/wiki/Eisenstadt"
     },
-]
+];
 
 for (let stadt of STAEDTE) {
-    let marker = L.marker([stadt.lat, stadt.lng])
+    L.marker([stadt.lat, stadt.lng])
         .addTo(map)
         .bindPopup(`<b>${stadt.title}</b> <br>
-    <a href="${stadt.wikipedia}">Wikipedia</a>
+            <a href="${stadt.wikipedia}">Wikipedia</a>
     `)
 };
 
@@ -182,5 +175,3 @@ for (let stadt of STAEDTE) {
 L.control.scale({
     imperial: false,
 }).addTo(map);
-
-//Auf Startsteite keine Geolocation
