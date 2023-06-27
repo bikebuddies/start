@@ -1,7 +1,7 @@
 // Zentrum Karte Objekt
 let stpolten = {
-    lat: 48.18735,
-    lng: 15.64139,
+    lat: 48.00,
+    lng: 16.00,
     title: "St. Pölten, Niederösterreich"
 };
 
@@ -10,7 +10,7 @@ let map = L.map("map", {
     fullscreenControl: true
 }).setView([
     stpolten.lat, stpolten.lng
-], 7);
+], 8);
 
 //thematische Layer
 let themaLayer = {
@@ -80,7 +80,7 @@ async function niederoesterreichRadwege(jsonFile) {
         "Triestingau-Radweg": "#B8860B", //DarkGoldenrod
         "Triesting-Gölsental-Radweg": "#FFB90F", //DarkGoldenrod1
         "Traisentalweg": "#FFFACD", //LemonChiffon
-        "Thayarunde Waldviertel": "#FFEBCD", //LightGo.denrod
+        "Thayarunde Waldviertel": "#C154C1", //Fuchsia
         "Piestingtal-Radweg": "#EEEE00", //yellow2
         "Kamp-Thaya-March-Radroute": "#FFD700", //gold
     };
@@ -113,7 +113,7 @@ async function wienRadwege(jsonFile) {
     let jsondata = await response.json();
     let einzelneRouten = {};
     let routenFarben = { //Gelbtöne von https://www.farb-tabelle.de/de/farbtabelle.htm#orange
-        "Wienerwald (Eurovelo 9)": "#EED5B7", //bisque2
+        "Wienerwald (Eurovelo 9)": "#483c32", //Taupe
         "Wasser zu Wein": "#FFDAB9", //PeachPuff
         "Urban und Rural": "#FFA500", //orane
         "Wiener Wasser": "#FF8247", //sienna1
